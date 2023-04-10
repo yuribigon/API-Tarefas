@@ -1,0 +1,25 @@
+{
+  "name": "atividade-final-backend1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm i --production && npx tsc --outDir dist src/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.15.10",
+    "@types/uuid": "^9.0.1",
+    "ts-node-dev": "^2.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "typescript": "^5.0.2",
+    "uuid": "^9.0.0"
+  },
+  "description": ""
+}
