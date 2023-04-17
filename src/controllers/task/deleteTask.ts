@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { deleteTask } from "../db/users";
+import { deleteTask } from "../../db/users";
 
 export const deleteTaskController = (req: Request, res: Response) => {
     try {

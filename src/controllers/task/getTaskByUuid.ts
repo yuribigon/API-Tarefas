@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
-import { ValidationError } from "../models/user";
-import { selectUserByUuid, users } from "../db/users";
-import { Task } from "../models/task";
+import { ValidationError } from "../../models/user";
+import { selectUserByUuid, users } from "../../db/users";
+import { Task } from "../../models/task";
 
 export const getTaskByUuid = (req: Request, res: Response) => {
     try {

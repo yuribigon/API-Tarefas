@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { selectUsersByFilter } from "../db/users";
-import { ValidationError } from "../models/user";
+import { selectUsersByFilter } from "../../db/users";
+import { ValidationError } from "../../models/user";
 
 export const getUsersController = (req: Request, res: Response) => {
   try {

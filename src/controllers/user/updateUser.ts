@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
-import { updateUserByUuid, users } from "../db/users";
-import { ValidationError } from "../models/user";
+import { updateUserByUuid, users } from "../../db/users";
+import { ValidationError } from "../../models/user";
 
 export const updateUserController = (req: Request, res: Response) => {
     try {

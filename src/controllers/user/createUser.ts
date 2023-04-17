@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
-import { User, ValidationError } from "../models/user";
-import { insertUser, users } from "../db/users";
+import { User, ValidationError } from "../../models/user";
+import { insertUser, users } from "../../db/users";
 
 export const createUserController = (req: Request, res: Response) => {
   try {

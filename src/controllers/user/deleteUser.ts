@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { deleteUserByUuid } from "../db/users";
+import { deleteUserByUuid } from "../../db/users";
 
 export const deleteUserController = (req: Request, res: Response) => {
   const uuidToRemove = req.params.uuid;
