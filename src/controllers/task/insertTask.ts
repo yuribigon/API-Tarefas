@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
-import { ValidationError } from "../models/user";
-import { selectUserByUuid } from "../db/users";
+import { selectUserByUuid } from "../../db/users";
+import { ValidationError } from "../../models/task";
 
 export const insertTaskController = (req: Request, res: Response) => {
   try {
@@ -8,7 +8,7 @@ export const insertTaskController = (req: Request, res: Response) => {
     const user = selectUserByUuid(userIndex);
     const title = req.body.title;
     const description = req.body.description;
-
+    
     if(!user) {
       throw new ValidationError('Usuário não encontrado');
     }

@@ -8,6 +8,7 @@ export class ValidationError extends Error {
 
 export class Task {
   private uuidTask: string;
+  private status: 'ativo' | 'arquivado' = 'ativo'
 
   constructor(
     private title: string,
@@ -28,13 +29,19 @@ export class Task {
     return this.description;
   }
 
+  getStatus() : 'ativo' | 'arquivado' {
+    return this.status;
+  }
   
-  updateTransaction(title : string | undefined, description : string | undefined) : void {
+  updateTransaction(title : string | undefined, description : string | undefined, status : 'ativo' | 'arquivado' | undefined) : void {
     if(title) {
       this.title = title;
     }
     if(description) {
       this.description = description;
+    }
+    if(status) {
+      this.status = status;
     }
   }
 

@@ -49,8 +49,8 @@ export class User {
   deleteTask(index : number) : void {
     this.tasks.splice(index, 1);
   } 
-  updateTransaction(index : number, title : string | undefined, description : string | undefined) : void {
-    this.tasks[index].updateTransaction(title, description);
+  updateTransaction(index : number, title : string | undefined, description : string | undefined, status : 'ativo' | 'arquivado' | undefined ) : void {
+    this.tasks[index].updateTransaction(title, description, status);
   }  
   updateUser(
     name : string,

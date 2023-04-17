@@ -64,11 +64,11 @@ export const deleteTask = (indexUser : number, taskID: string) => {
 }
 
 export const updateTaskByUuid =
-(indexUser : number, taskID: string, title : string | undefined, description : string | undefined) => {
+(indexUser : number, taskID: string, title : string | undefined, description : string | undefined, status : 'ativo' | 'arquivado' | undefined) => {
   const indexTask = users[indexUser].getTasks()
   .findIndex((task) => task.getUuidTask() === taskID);
   if(indexTask === -1) {
     throw new ValidationError("Tarefa não encontrada.")
   }
-  users[indexUser].updateTransaction(indexTask, title, description);
+  users[indexUser].updateTransaction(indexTask, title, description, status);
 }
