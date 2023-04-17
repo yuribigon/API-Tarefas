@@ -4,8 +4,8 @@ import { ValidationError } from "../../models/task";
 
 export const insertTaskController = (req: Request, res: Response) => {
   try {
-    const userIndex = req.body.userIndex;
-    const user = selectUserByUuid(userIndex);
+    const userFilter : string = req.params.userID
+    const user = selectUserByUuid(userFilter);
     const title = req.body.title;
     const description = req.body.description;
     

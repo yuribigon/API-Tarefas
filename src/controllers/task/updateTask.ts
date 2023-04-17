@@ -3,8 +3,7 @@ import { updateTaskByUuid } from "../../db/users";
 
 export const updateTaskController = (req: Request, res: Response) => {
     try {
-        const taskID = req.params.taskID;
-        const userIndex = req.body.userIndex;
+        const { taskID, userID } = req.params;
         let { title, description, status} = req.body;
         
         if(typeof taskID !== 'string') {
@@ -15,7 +14,7 @@ export const updateTaskController = (req: Request, res: Response) => {
             return res.status(400).json({ message: "Insira os dados a atualizar de forma correta." }); 
         }
         
-        updateTaskByUuid(userIndex, taskID, title, description, status);
+        updateTaskByUuid(userID, taskID, title, description, status);
         return res.status(200).json({ message: "Tarefa atualizada com sucesso." })
     }
     catch(error : any) {

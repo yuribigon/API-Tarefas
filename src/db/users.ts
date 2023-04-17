@@ -21,7 +21,7 @@ export const insertUser = (user: User) => {
 export const selectUserByUuid = (uuidFilter: string): User | undefined => {
   return users.find(
     (user) => user.getUuid() === uuidFilter
-)
+  )
 }
 
 export const deleteUserByUuid = (uuidToRemove: string) => {
@@ -51,26 +51,37 @@ export const selectUsersByFilter = (nameFilter?: string, emailFilter?: string) :
   )
   return filteredUser;
 } 
-export const getUserTasks = (index : number) : Array<Task> => {
-  return users[index].getTasks();
-}
-
-export const deleteTask = (indexUser : number, taskID: string) => {
-  
-  const indexTransaction = users[indexUser].getTasks()
-  .findIndex((task) => task.getUuidTask() === taskID);
-  if(indexTransaction === -1) {
-    throw new ValidationError("Tarefa não encontrada.")
+export const getUserTasks = (uuidFilter : string) : Array<Task> => {
+  const userFiltered = selectUserByUuid(uuidFilter)
+  if (!userFiltered){
+    throw new Error("Usuário não encontrado")
   }
-  users[indexUser].deleteTask(indexTransaction);
+  return userFiltered.getTasks();
 }
 
-export const updateTaskByUuid =
-(indexUser : number, taskID: string, title : string | undefined, description : string | undefined, status : 'ativo' | 'arquivado' | undefined) => {
-  const indexTask = users[indexUser].getTasks()
-  .findIndex((task) => task.getUuidTask() === taskID);
+export const deleteTask = (uuidFilter : string, taskID: string) => {
+  const userFiltered = selectUserByUuid(uuidFilter)
+  if (!userFiltered){
+    throw new Error("Usuário não encontrado")
+  }
+  const indexTask = userFiltered.getTasks()
+    .findIndex((task) => task.getUuidTask() === taskID);
   if(indexTask === -1) {
     throw new ValidationError("Tarefa não encontrada.")
   }
-  users[indexUser].updateTransaction(indexTask, title, description, status);
+  userFiltered.deleteTask(indexTask);
+}
+
+export const updateTaskByUuid =
+(uuidFilter : string, taskID: string, title : string | undefined, description : string | undefined, status : 'ativo' | 'arquivado' | undefined) => {
+  const userFiltered = selectUserByUuid(uuidFilter)
+  if (!userFiltered){
+    throw new Error("Usuário não encontrado")
+  }  
+  const indexTask = userFiltered.getTasks()
+    .findIndex((task) => task.getUuidTask() === taskID);
+  if(indexTask === -1) {
+    throw new ValidationError("Tarefa não encontrada.")
+  }
+  userFiltered.updateTransaction(indexTask, title, description, status);
 }

@@ -4,8 +4,8 @@ import { getUserTasks } from "../../db/users";
 
 export const getTasks = (req: Request, res: Response) => {
     try {
-        const index = req.body.userIndex;
-        const tasks : Array<Task> = getUserTasks(index);
+        const userFilter : string = req.params.userID;
+        const tasks : Array<Task> = getUserTasks(userFilter);
         if(!tasks.length)res.status(200).json("Esse usuario ainda não tem nenhuma tarefa adicionada.");
         res.status(200).json(tasks);
     }
