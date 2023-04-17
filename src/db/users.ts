@@ -18,8 +18,10 @@ export const insertUser = (user: User) => {
     userValidation(user.getName(), user.getEmail());
 };
 
-export const selectUserByUuid = (index: number): User | undefined => {
-  return users[index];
+export const selectUserByUuid = (uuidFilter: string): User | undefined => {
+  return users.find(
+    (user) => user.getUuid() === uuidFilter
+)
 }
 
 export const deleteUserByUuid = (uuidToRemove: string) => {

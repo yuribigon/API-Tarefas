@@ -4,7 +4,8 @@ import { ValidationError } from "../../models/task";
 
 export const getUserByUuidController = (req: Request, res: Response) => {
     try {
-      const userFound = selectUserByUuid(req.body.userIndex)
+      const uuidFilter : string = req.params.uuid
+      const userFound = selectUserByUuid(uuidFilter)
       
       if (userFound) {
         res.status(200).json({
