@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { Task } from "../models/task";
-import { getUserTasks } from "../db/users";
+import { Task } from "../../models/task";
+import { getUserTasks } from "../../db/users";
 
 export const getTasks = (req: Request, res: Response) => {
     try {

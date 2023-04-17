@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
-import { selectUserByUuid } from "../db/users";
-import { ValidationError } from "../models/task";
+import { selectUserByUuid } from "../../db/users";
+import { ValidationError } from "../../models/task";
 
 export const getUserByUuidController = (req: Request, res: Response) => {
     try {

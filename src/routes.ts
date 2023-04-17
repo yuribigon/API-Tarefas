@@ -1,14 +1,14 @@
 import { Express } from 'express';
-import { createUserController } from './controllers/createUser';
-import { deleteUserController } from './controllers/deleteUser';
-import { getTasks } from './controllers/getTasks';
-import { getUserByUuidController } from './controllers/getUserByUuid';
-import { getUsersController } from './controllers/getUsers';
-import { insertTaskController } from './controllers/insertTask';
-import { updateUserController } from './controllers/updateUser';
-import { getTaskByUuid } from "./controllers/getTaskByUuid";
-import { deleteTaskController } from './controllers/deleteTask';
-import { updateTaskController } from './controllers/updateTask';
+import { createUserController } from './controllers/user/createUser';
+import { deleteUserController } from './controllers/user/deleteUser';
+import { getTasks } from './controllers/task/getTasks';
+import { getUserByUuidController } from './controllers/user/getUserByUuid';
+import { getUsersController } from './controllers/user/getUsers';
+import { insertTaskController } from './controllers/task/insertTask';
+import { updateUserController } from './controllers/user/updateUser';
+import { getTaskByUuid } from "./controllers/task/getTaskByUuid";
+import { deleteTaskController } from './controllers/task/deleteTask';
+import { updateTaskController } from './controllers/task/updateTask';
 
 
 export function registerRoutes(app: Express) {

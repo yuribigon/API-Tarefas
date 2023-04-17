@@ -2,7 +2,6 @@ import * as dotenv from 'dotenv'
 const express = require('express')
 import { Express, Request, Response } from 'express';
 import { registerMiddlewares } from './middlewares';
-
 import { registerRoutes } from './routes';
 
 dotenv.config();
