@@ -59,6 +59,23 @@ export const getUserTasks = (uuidFilter : string) : Array<Task> => {
   return userFiltered.getTasks();
 }
 
+export const selectTasksByFilter = (tasks: Array<Task>, titleFilter?: string, statusFilter?: string) : Task[] => {
+  const filteredTask = tasks.filter(
+      (task) => {
+          const titleMatches = titleFilter
+              ? task.getTitle().toLowerCase().indexOf(titleFilter.toLowerCase()) >= 0
+              : true;
+          const statusMatches = statusFilter 
+              ? task.getStatus().toLowerCase().indexOf(statusFilter.toLowerCase()) >= 0
+              : true;
+          return titleMatches && statusMatches;
+      },
+  )
+  return filteredTask;
+} 
+
+
+
 export const deleteTask = (uuidFilter : string, taskID: string) => {
   const userFiltered = selectUserByUuid(uuidFilter)
   if (!userFiltered){
