@@ -3,6 +3,7 @@ const express = require('express')
 import { Express, Request, Response } from 'express';
 import { registerMiddlewares } from './middlewares';
 import { registerRoutes } from './routes/routes';
+import { pgHelper } from './db/typeorm/pg-helper';
 
 dotenv.config();
 
@@ -19,6 +20,6 @@ registerMiddlewares(app);
 
 registerRoutes(app);
 
-app.listen(port, () => {
-    console.log(`API running at http://localhost:${port}`);
-});
+pgHelper.connect()
+  .then(() => app.listen(port, () => console.log(`API running at http://localhost:${port}`)))
+  .catch((error) => console.log('Error while connection to DB', error));
