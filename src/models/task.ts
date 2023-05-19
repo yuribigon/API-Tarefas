@@ -7,14 +7,16 @@ export class ValidationError extends Error {
 }
 
 export class Task {
-  private uuidTask: string;
-  private status: 'ativo' | 'arquivado' = 'ativo'
-
+  
   constructor(
     private title: string,
     private description: string,
+    private status: boolean = true,
+    private createdAt: string,
+    private updatedAt: string,
+    private uuidTask: string = uuidv4(),
   ) {
-    this.uuidTask = uuidv4();
+     
   }
 
   getUuidTask() : string {
@@ -29,11 +31,11 @@ export class Task {
     return this.description;
   }
 
-  getStatus() : 'ativo' | 'arquivado' {
+  getStatus() : boolean {
     return this.status;
   }
   
-  updateTransaction(title : string | undefined, description : string | undefined, status : 'ativo' | 'arquivado' | undefined) : void {
+  updateTask(title : string | undefined, description : string | undefined, status : boolean | undefined) : void {
     if(title) {
       this.title = title;
     }

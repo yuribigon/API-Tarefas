@@ -5,15 +5,15 @@ export class ValidationError extends Error {
 }
 
 export class User {
-  private uuid: string;
-
+  
   constructor(
     private name: string,
     private email: string,
-    private tasks: Task[] = [],
+    private password: string,
+    private uuid: string = uuidv4(),
+    private tasks?: Task[],
   ) {
     this.setName(name)
-    this.uuid = uuidv4();
   }
    
   getUuid() : string {
@@ -31,27 +31,29 @@ export class User {
   getEmail() : string {
     return this.email;
   }
-
-  getTasks() : Task[] {
-    return this.tasks;
+  getPassword() : string {
+    return this.password;
   }
+  // getTasks() : Task[] {
+  //   return this.tasks;
+  // }
 
-  addTask(title: string, description: string): void {
-    if(title && description) {
-      const newTask = new Task(title, description);
+  // addTask(title: string, description: string): void {
+  //   if(title && description) {
+  //     const newTask = new Task(title, description);
             
-      this.tasks.push(newTask);
-    } else {
-      const error = new ValidationError('Dados inválidos')
-      throw error;
-    }
-  }
-  deleteTask(index : number) : void {
-    this.tasks.splice(index, 1);
-  } 
-  updateTransaction(index : number, title : string | undefined, description : string | undefined, status : 'ativo' | 'arquivado' | undefined ) : void {
-    this.tasks[index].updateTransaction(title, description, status);
-  }  
+  //     this.tasks.push(newTask);
+  //   } else {
+  //     const error = new ValidationError('Dados inválidos')
+  //     throw error;
+  //   }
+  // }
+  // deleteTask(index : number) : void {
+  //   this.tasks.splice(index, 1);
+  // } 
+  // updateTask(index : number, title : string | undefined, description : string | undefined, status : 'ativo' | 'arquivado' | undefined ) : void {
+  //   this.tasks[index].updateTask(title, description, status);
+  // }  
   updateUser(
     name : string,
     email: string,
