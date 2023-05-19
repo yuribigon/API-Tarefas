@@ -23,6 +23,15 @@ export class UserRepository {
     return savedUser.uuid;
   }
 
+  async deleteUserByUuid(uuid: string): Promise<void> {
+    const user = await this.userRepository
+        .createQueryBuilder("user")
+        .delete()
+        .from(UserEntity)
+        .where("user_uid = ", { uuid })
+        .execute()
+  }
+
   async getAllUsers(): Promise<User[]> {
     const allUsers = await this.userRepository.find();
     return allUsers.map((entity) => new User(
