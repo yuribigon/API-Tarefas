@@ -33,16 +33,28 @@ export class UserRepository {
   }
 
   async getAllUsers(): Promise<User[]> {
-    const allUsers = await this.userRepository.find();
+    const allUsers = await this.userRepository.find({
+      relations: ['task']
+    });
     return allUsers.map((entity) => new User(
       entity.name,
       entity.email,
       entity.password,
-      entity.uuid
+      entity.uuid,
+      entity.tasks?.length
+          ? entity.tasks.map((task)=> new Task(
+            task.title,
+            task.description,
+            task.status,
+            task.createdAt,
+            task.updatedAt,
+            task.uuid,
+          ))
+          : undefined,
     ));
   }
 
-  async getGrowdever(uuid: string): Promise<User | undefined> {
+  async getUser(uuid: string): Promise<User | undefined> {
     const user = await this.userRepository.findOne({
       where: { uuid },
       relations: ['task'],
@@ -64,6 +76,20 @@ export class UserRepository {
           ))
           : undefined,
       );
+    }
+  }
+
+  async updateUser(uuid: string, name?: string, email?: string): Promise<string | undefined> {
+    const userFound = await this.userRepository.findOne({ where: { uuid }});
+    if (userFound) {
+      if(name){
+        userFound.name = name;
+      }
+      if(email){
+        userFound.email = email;
+      }
+      const userUptaded = await this.userRepository.save(userFound);
+      return userUptaded.uuid;
     }
   }
 }
