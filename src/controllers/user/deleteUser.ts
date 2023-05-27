@@ -25,6 +25,7 @@ export const deleteUserController = async (req: Request, res: Response) => {
   catch(error : any) {
     console.log('[delete-user-controller] Error', error);
     return res.status(404).json({ message: "Recurso não encontrado" })
+    
   }
 }
 

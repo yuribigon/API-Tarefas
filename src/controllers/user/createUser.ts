@@ -1,6 +1,5 @@
 import { Request, Response } from "express"
 import { User, ValidationError } from "../../models/user";
-import { insertUser, users } from "../../db/users";
 import { UserRepository } from "../../repository/user.repository";
 
 // export const createUserController = (req: Request, res: Response) => {
@@ -27,7 +26,7 @@ export const createUserController = async (req: Request, res: Response) => {
     const userRepository = new UserRepository();
     const insertedUuid = await userRepository.createUser(newUser)
     if (insertedUuid) {
-      return res.status(200).json("Usuário criado com sucesso!")
+      return res.status(201).json("Usuário criado com sucesso!")
     }
   } catch (error) {
     console.log('[create-user-controller] Error', error);

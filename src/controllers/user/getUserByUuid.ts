@@ -1,24 +1,48 @@
 import { Request, Response } from "express"
-import { selectUserByUuid } from "../../db/users";
 import { ValidationError } from "../../models/task";
+import { UserRepository } from "../../repository/user.repository";
 
-export const getUserByUuidController = (req: Request, res: Response) => {
-    try {
-      const uuidFilter : string = req.params.uuid
-      const userFound = selectUserByUuid(uuidFilter)
+// export const getUserByUuidController = (req: Request, res: Response) => {
+//     try {
+//       const uuidFilter : string = req.params.uuid
+//       const userFound = selectUserByUuid(uuidFilter)
       
-      if (userFound) {
-        res.status(200).json({
-          'id': userFound.getUuid(),
-          'name': userFound.getName(),
-          'email': userFound.getEmail(),
-        })
-      }
-      else {
-        throw new ValidationError("Usuário não encontrado.")
-      }
+//       if (userFound) {
+//         res.status(200).json({
+//           'id': userFound.getUuid(),
+//           'name': userFound.getName(),
+//           'email': userFound.getEmail(),
+//         })
+//       }
+//       else {
+//         throw new ValidationError("Usuário não encontrado.")
+//       }
+//     }
+//     catch(error : any) {
+//         res.status(404).json({ message: error.message })
+//     }
+// }
+
+export const getUserByUuidController = async (req: Request, res: Response) => {
+  try {
+    console.log('[get-user-by-uuid-controller] Receive request in controller')
+    const uuidFilter : string = req.params.uuid
+    const userRepository = new UserRepository();
+    const userFound = await userRepository.getUser(uuidFilter)
+    
+    if (userFound) {
+      res.status(200).json({
+        'id': userFound.getUuid(),
+        'name': userFound.getName(),
+        'email': userFound.getEmail(),
+      })
     }
-    catch(error : any) {
-        res.status(404).json({ message: error.message })
+    else {
+      throw new ValidationError("Usuário não encontrado.")
     }
+  }
+  catch(error : any) {
+    console.log('[get-user-by-uuid-controller] Error', error);
+      res.status(404).json({ message: error.message })
+  }
 }
