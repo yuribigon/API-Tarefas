@@ -1,5 +1,7 @@
 import "dotenv/config";
 import { DataSource, DataSourceOptions } from "typeorm";
+import { UserEntity } from "./entities/user.entity";
+import { TaskEntity } from "./entities/task.entity";
 
 const config: DataSourceOptions = {
     type: "postgres",
@@ -9,8 +11,8 @@ const config: DataSourceOptions = {
         rejectUnauthorized: false,
     },
 
-    // entities: [],
-    // migrations: [],
+    entities: [UserEntity, TaskEntity],
+    migrations: ['db/typeorm/migrations/*.js'],
 };
 
 export const dataSource = new DataSource(config);
