@@ -34,6 +34,15 @@ export class User {
   getPassword() : string {
     return this.password;
   }
+  updateUser(
+    name : string,
+    email: string,
+  ) : void 
+  {
+    this.name = name;
+    this.email = email;
+  }
+  
   // getTasks() : Task[] {
   //   return this.tasks;
   // }
@@ -54,12 +63,4 @@ export class User {
   // updateTask(index : number, title : string | undefined, description : string | undefined, status : 'ativo' | 'arquivado' | undefined ) : void {
   //   this.tasks[index].updateTask(title, description, status);
   // }  
-  updateUser(
-    name : string,
-    email: string,
-  ) : void 
-  {
-    this.name = name;
-    this.email = email;
-  }
 }

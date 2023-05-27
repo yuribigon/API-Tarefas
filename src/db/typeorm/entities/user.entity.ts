@@ -2,7 +2,7 @@ import { BaseEntity, Entity, Column, PrimaryColumn, OneToOne, JoinColumn, OneToM
 import { TaskEntity } from './task.entity';
 
 
-@Entity({ name: 'user_account' })
+@Entity('user_account')
 
 export class UserEntity {
   @PrimaryColumn({ name: 'user_id' })

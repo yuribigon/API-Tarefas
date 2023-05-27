@@ -7,7 +7,7 @@ import { pgHelper } from './db/typeorm/pg-helper';
 
 dotenv.config();
 
-const port = process.env.PORT||8000;
+const port = process.env.PORT;
 
 const app: Express = express();
 app.use(express.json())

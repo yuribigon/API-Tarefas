@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm i --production && npx tsc --outDir dist src/index.ts",
-    "dev": "npx tsc --outDir dist src/index.ts"
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
+    "build-old": "npm i --production && npx tsc --outDir dist src/index.ts",
+    "dev-old": "npx tsc --outDir dist src/index.ts"
   },
   "author": "",
   "license": "ISC",
