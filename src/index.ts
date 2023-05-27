@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv'
 const express = require('express')
 import { Express, Request, Response } from 'express';
-import { registerMiddlewares } from './middlewares';
+//import { registerMiddlewares } from './_middlewares/_index';
 import { registerRoutes } from './routes/routes';
 import { pgHelper } from './db/typeorm/pg-helper';
 
@@ -16,7 +16,7 @@ app.get('/', (_: Request, res: Response) => {
   res.json({ message: 'API waiting for requests...' });
 });
 
-registerMiddlewares(app);
+//registerMiddlewares(app);
 
 registerRoutes(app);
 

@@ -1,23 +1,24 @@
 import { Request, Response } from "express"
-import { selectUserByUuid } from "../../db/users";
-import { ValidationError } from "../../models/task";
+import { ValidationError } from "../validations";
+import { pgHelper } from "../../db/typeorm/pg-helper";
+import { TaskEntity } from "../../db/typeorm/entities/task.entity";
+import { v4 as uuidv4 } from 'uuid';
 
-export const insertTaskController = (req: Request, res: Response) => {
+export const insertTaskController = async (req: Request, res: Response) => {
   try {
-    const userFilter : string = req.params.userID
-    const user = selectUserByUuid(userFilter);
-    const title = req.body.title;
-    const description = req.body.description;
-    
-    if(!user) {
-      throw new ValidationError('Usuário não encontrado');
+    const taskRepository = pgHelper.client.getRepository(TaskEntity);
+    const newAssessment = await taskRepository.save(
+      new TaskEntity({
+        uuidTask: uuidv4(),
+        ...req.body,
+      },
+    ))
+    if (!newAssessment) {
+      throw new ValidationError('Dados incorretos');
     }
-
-    user.addTask(title, description);
-
-
-    return res.status(200).json("Tarefa adicionada com sucesso!")
     
+    return res.status(200).json("Tarefa adicionada com sucesso!")
+
   } catch (error) {
     if (error instanceof ValidationError) {
         return res.status(400).json({ message: error.message })

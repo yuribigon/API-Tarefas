@@ -1,23 +1,35 @@
 import { Request, Response } from "express"
-import { updateTaskByUuid } from "../../db/users";
+import { pgHelper } from "../../db/typeorm/pg-helper";
+import { TaskEntity } from "../../db/typeorm/entities/task.entity";
+import { ValidationError } from "../validations";
 
-export const updateTaskController = (req: Request, res: Response) => {
+export const updateTaskController = async (req: Request, res: Response) => {
     try {
-        const { taskID, userID } = req.params;
-        let { title, description, status} = req.body;
+        console.log('[update-task-controller] Receive request in controller')
+        const uuid = req.params.uuid;
+        const {title, description, status} = req.body;
         
-        if(typeof taskID !== 'string') {
-            return res.status(400).json({ message: "Dados informados incorretos." });
-        }
-        if(typeof title !== 'string' && typeof description !== 'string' && (status !== "ativo" &&
-        status !== "arquivado") ) {
-            return res.status(400).json({ message: "Insira os dados a atualizar de forma correta." }); 
-        }
+        const taskRepository = pgHelper.client.getRepository(TaskEntity);
+        const task = await taskRepository.findOne({
+            where: { uuid }
+        })
         
-        updateTaskByUuid(userID, taskID, title, description, status);
+        if(!task) {
+            throw new ValidationError("Tarefa não encontrada!");
+        }
+
+        if (task){
+            task.title = title;
+            task.description = description;
+            task.status = status;
+        }
+
+        const taskUptaded = await taskRepository.save(task);
+
         return res.status(200).json({ message: "Tarefa atualizada com sucesso." })
     }
     catch(error : any) {
-        return res.status(404).json({ message: error.message })
+        console.log('[delete-user-controller] Error', error);
+        return res.status(500).json({ message: error.message })
     }
 }

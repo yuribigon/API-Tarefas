@@ -1,41 +1,31 @@
 import { Request, Response } from "express";
-import { Task, ValidationError } from "../../models/task";
-import { getUserTasks, selectTasksByFilter } from "../../db/users";
+import { Task } from "../../models/task";
 
-export const getTasks = (req: Request, res: Response) => {
-    try {
-      const userFilter : string = req.params.userID;
-      const tasks : Array<Task> = getUserTasks(userFilter);
-      if(!tasks.length)res.status(200).json("Esse usuario ainda não tem nenhuma tarefa adicionada.");
+import { ValidationError } from "../validations";
+import { pgHelper } from "../../db/typeorm/pg-helper";
+import { TaskEntity } from "../../db/typeorm/entities/task.entity";
 
-      const titleFilter = req.query.title as string 
-      if (typeof titleFilter !== 'string' && titleFilter !== undefined) {
-        throw new ValidationError("Título informado inválido.");
-      }
+export const getTasks = async (req: Request, res: Response) => {
+  try {
+    
+    const uuid = req.params.uuid;
+    const taskRepository = pgHelper.client.getRepository(TaskEntity);
+    const task = await taskRepository.findOne({
+      where: { uuid },
+      relations: ['growdever']
+    })
+    
+    if (task) res.status(200).json(task);
 
-      const statusFilter = req.query.status as string
-      if (typeof statusFilter !== 'string' && statusFilter !== undefined) {
-        throw new ValidationError("Status informado inválido.");
-      }
-      
-      const allTasks = selectTasksByFilter(tasks, titleFilter, statusFilter);
+    throw new ValidationError("Tarefa não encontrada!");
 
-      const tasksFilteredMap = allTasks.map((task) =>{
-        return {
-          "id" : task.getUuidTask(),
-          "title" : task.getTitle(),
-          "description" : task.getDescription(),
-          "status" : task.getStatus(),
-        }
-      })
-      
-      if(!tasksFilteredMap.length) {
-        res.status(404).json({message : "Nenhuma tarefa foi encontrada!"});
-      }
-
-      res.status(200).json(tasksFilteredMap);
-    }
-  catch(error : any) {
-    return res.status(400).json({ message: error.message })
+    
   }
+catch(error : any) {
+  console.log('[get-task-by-uuid-controller] Error', error);
+        if (error instanceof ValidationError) {
+            return res.status(400).json({ message: error.message });
+        }
+        return res.status(500).json({ message: "Erro interno!" });
+}
 }

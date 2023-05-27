@@ -1,9 +1,10 @@
 
->>>PENDENTE
+>>> PENDENTE
 
-ATUALIZAR OS CONTROLLERS (TYPEORM)
+# migrations
+# fetch com front
+# middlewares
 
-createuser - OK
-deleteUser - OK
 
-*** OK = sem teste
+
+>>> TESTAR (INSOMNIA)

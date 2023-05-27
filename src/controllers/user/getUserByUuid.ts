@@ -1,27 +1,6 @@
 import { Request, Response } from "express"
-import { ValidationError } from "../../models/task";
+import { ValidationError } from "../validations";
 import { UserRepository } from "../../repository/user.repository";
-
-// export const getUserByUuidController = (req: Request, res: Response) => {
-//     try {
-//       const uuidFilter : string = req.params.uuid
-//       const userFound = selectUserByUuid(uuidFilter)
-      
-//       if (userFound) {
-//         res.status(200).json({
-//           'id': userFound.getUuid(),
-//           'name': userFound.getName(),
-//           'email': userFound.getEmail(),
-//         })
-//       }
-//       else {
-//         throw new ValidationError("Usuário não encontrado.")
-//       }
-//     }
-//     catch(error : any) {
-//         res.status(404).json({ message: error.message })
-//     }
-// }
 
 export const getUserByUuidController = async (req: Request, res: Response) => {
   try {

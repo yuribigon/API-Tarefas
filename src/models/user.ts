@@ -1,9 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Task } from './task';
-
-export class ValidationError extends Error {
-}
-
 export class User {
   
   constructor(
@@ -42,25 +38,4 @@ export class User {
     this.name = name;
     this.email = email;
   }
-  
-  // getTasks() : Task[] {
-  //   return this.tasks;
-  // }
-
-  // addTask(title: string, description: string): void {
-  //   if(title && description) {
-  //     const newTask = new Task(title, description);
-            
-  //     this.tasks.push(newTask);
-  //   } else {
-  //     const error = new ValidationError('Dados inválidos')
-  //     throw error;
-  //   }
-  // }
-  // deleteTask(index : number) : void {
-  //   this.tasks.splice(index, 1);
-  // } 
-  // updateTask(index : number, title : string | undefined, description : string | undefined, status : 'ativo' | 'arquivado' | undefined ) : void {
-  //   this.tasks[index].updateTask(title, description, status);
-  // }  
 }

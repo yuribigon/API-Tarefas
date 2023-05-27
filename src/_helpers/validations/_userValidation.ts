@@ -1,5 +1,5 @@
-import { users } from "../../db/users"
-import { ValidationError } from "../../models/user";
+import { ValidationError } from "../../controllers/validations";
+
 
 export function userValidation(
     name : string, email : string)

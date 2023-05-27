@@ -1,11 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
 
-export class ValidationError extends Error {
-    constructor(message: string) {
-        super(message)
-    }
-}
-
 export class Task {
   
   constructor(
