@@ -2,6 +2,8 @@
 
 >>> PENDENTE
 # fetch com front
+# render
+# vercel 
 # middlewares
 
 
