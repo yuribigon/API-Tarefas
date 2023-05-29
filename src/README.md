@@ -1,10 +1,10 @@
+>>> TESTAR <<<
 
 >>> PENDENTE
-
-# migrations
 # fetch com front
 # middlewares
 
 
-
->>> TESTAR (INSOMNIA)
+>>> FUTURAS MELHORIAS <<<<
+# aumento de validações
+# usecase em todos os controllers

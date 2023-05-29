@@ -4,21 +4,13 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "node dist/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
-    "build-old": "npm i --production && npx tsc --outDir dist src/index.ts",
-    "dev-old": "npx tsc --outDir dist src/index.ts"
+    "start": "node dist/main/index.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/main/index.js\""
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@types/dotenv": "^8.2.0",
-    "@types/express": "^4.17.17",
-    "@types/node": "^18.16.13",
-    "@types/uuid": "^9.0.1",
-    "ts-node-dev": "^2.0.0"
-  },
   "dependencies": {
+    "@types/pg": "^8.6.6",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "pg": "^8.11.0",
@@ -26,6 +18,15 @@
     "typeorm": "^0.3.16",
     "typescript": "^5.0.2",
     "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.16.13",
+    "@types/uuid": "^9.0.1",
+    "@types/dotenv": "^8.2.0",
+    "concurrently": "^8.0.1",
+    "nodemon": "^2.0.21",
+    "ts-node-dev": "^2.0.0"
   },
   "description": ""
 }
