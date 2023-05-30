@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
+    "buildRender": "npm i --production && npx tsc --outDir dist main/index.ts",
     "start": "node dist/main/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/main/index.js\""
   },
