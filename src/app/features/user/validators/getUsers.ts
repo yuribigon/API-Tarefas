@@ -1,4 +1,5 @@
-import { ValidationError } from "../../../shared/exceptions";
+import { ValidationError } from "../../../shared/exceptions/validationError";
+
 
 export const validateGetUsers = (params : any) => {
     const nameFilter = params.name as string 

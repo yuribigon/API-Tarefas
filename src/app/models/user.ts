@@ -5,7 +5,7 @@ export class User {
   constructor(
     private name: string,
     private email: string,
-    private password: string,
+    private password?: string,
     private uuid: string = uuidv4(),
     private tasks?: Task[],
   ) {
@@ -27,7 +27,7 @@ export class User {
   getEmail() : string {
     return this.email;
   }
-  getPassword() : string {
+  getPassword() : string | undefined {
     return this.password;
   }
   updateUser(
@@ -37,5 +37,15 @@ export class User {
   {
     this.name = name;
     this.email = email;
+  }
+
+  toJson(): User {
+    return new User(
+      this.name,
+      this.email,
+      undefined,
+      this.uuid,
+      this.tasks,
+    );
   }
 }

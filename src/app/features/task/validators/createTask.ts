@@ -1,4 +1,4 @@
-import { ValidationError } from "../../../shared/exceptions";
+import { ValidationError } from "../../../shared/exceptions/validationError";
 
 export const ValidateCreateTask = (params : any) => {
   const title = params.title

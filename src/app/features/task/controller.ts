@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { ValidationError } from "../../shared/exceptions";
 import { ValidateCreateTask } from "./validators/createTask";
 import { TaskRepository } from "./repository";
 import { CreateTaskUseCase } from "./usecases/createTaskUseCase";
@@ -7,6 +6,7 @@ import { validateGetTask } from "./validators/getTask";
 import { GetTaskUseCase } from "./usecases/getTaskUseCase";
 import { DeleteTaskUseCase } from "./usecases/deleteUserUseCase";
 import { UserRepository } from "../user/repository";
+import { ValidationError } from "../../shared/exceptions/validationError";
 
 export const createTaskController = async (req: Request, res: Response) => {
   try {

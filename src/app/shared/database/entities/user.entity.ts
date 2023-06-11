@@ -14,7 +14,7 @@ export class UserEntity {
   email: string = '';
   
   @Column({ name: 'user_password' })
-  password: string = '';
+  password?: string = '';
 
   @OneToMany(
     () => TaskEntity,

@@ -1,4 +1,5 @@
-import { ValidationError } from "../../../shared/exceptions";
+import { ValidationError } from "../../../shared/exceptions/validationError";
+
 
 export const validateGetUserByUuid = (params : any) => {
     const uuid = params.uuid as unknown as string 

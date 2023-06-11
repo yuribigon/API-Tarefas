@@ -61,6 +61,11 @@ export class UserRepository {
       : undefined,
     ));
   }
+
+  async listUsers(filter: Partial<Omit<UserEntity,'tasks'>>): Promise<User[]> {
+    const usersFound = await this.userRepository.findBy(filter);
+    return usersFound.map((entity) => UserRepository.entityToModel(entity));
+  }
   
   async getUser(uuid: string): Promise<User | undefined> {
     const user = await this.userRepository.findOne({
@@ -106,5 +111,24 @@ export class UserRepository {
   const userUptaded = await this.userRepository.save(userFound);
   return userUptaded.user_id;
     }
+  }
+
+  private static entityToModel(userEntity: UserEntity) {
+    return new User(
+      userEntity.name,
+      userEntity.email,
+      userEntity.password,
+      userEntity.user_id,
+      userEntity.tasks?.length
+      ? userEntity.tasks.map((task)=> new Task(
+        task.title,
+        task.description,
+        task.status,
+        task.createdAt,
+        task.updatedAt,
+        task.task_id,
+      ))
+      : undefined,
+    );
   }
 }

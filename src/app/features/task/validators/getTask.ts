@@ -1,4 +1,4 @@
-import { ValidationError } from "../../../shared/exceptions";
+import { ValidationError } from "../../../shared/exceptions/validationError";
 
 export const validateGetTask = (params : any) => {
   const uuid = params.uuid as string 

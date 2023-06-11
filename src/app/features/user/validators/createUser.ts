@@ -1,4 +1,4 @@
-import { ValidationError } from "../../../shared/exceptions";
+import { ValidationError } from "../../../shared/exceptions/validationError";
 
 export const validateCreateUser = (params : any) => {
   const name = params.name

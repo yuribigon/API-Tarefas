@@ -1,5 +1,5 @@
 import { User } from "../../../models/user";
-import { ValidationError } from "../../../shared/exceptions";
+import { ValidationError } from "../../../shared/exceptions/validationError";
 import { UserRepository } from "../repository";
 
 interface UpdateUserUuidDTO {

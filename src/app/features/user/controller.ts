@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { ValidationError } from "../../shared/exceptions";
 import { UserRepository } from "./repository";
 import { validateGetUsers } from "./validators/getUsers";
 import { GetUsersUseCase } from "./usecases/getUsersUseCase";
@@ -8,6 +7,8 @@ import { CreateUsersUseCase } from "./usecases/createUsersUseCase";
 import { validateGetUserByUuid } from "./validators/getUserByUuid";
 import { GetUserByUuidUseCase } from "./usecases/getUsersByUuidUseCase";
 import { DeleteUserUseCase } from "./usecases/deleteUserUseCase";
+import { ValidationError } from "../../shared/exceptions/validationError";
+import { handleControllerError } from "../../shared/exceptions";
 
 export const getUsersController = async (req: Request, res: Response) => {
   try {
@@ -30,10 +31,7 @@ export const getUsersController = async (req: Request, res: Response) => {
   catch(error : any) {
     console.log('[get-users-controller] Error', error);
 
-    if (error instanceof ValidationError) {
-      return res.status(400).json({ message: error.message })
-    }
-    return res.status(500).json({ message: 'Erro ao processar usuário.' })
+    handleControllerError(error, res);
   }
 }
 
@@ -55,10 +53,7 @@ export const createUserController = async (req: Request, res: Response) => {
   catch(error : any) {
     console.log('[create-users-controller] Error', error);
 
-    if (error instanceof ValidationError) {
-      return res.status(400).json({ message: error.message })
-    }
-    return res.status(500).json({ message: 'Erro ao processar novo usuário.' })
+    handleControllerError(error, res);
   }
 }
 
@@ -94,10 +89,7 @@ export const getUserByUuidController = async (req: Request, res: Response) => {
   catch(error : any) {
     console.log('[get-user-by-uuid-controller] Error', error);
 
-    if (error instanceof ValidationError) {
-      res.status(404).json({ message: error.message })
-    }
-    return res.status(500).json({ message: 'Erro ao processar usuário.' })
+    handleControllerError(error, res);
   }
 }
 
