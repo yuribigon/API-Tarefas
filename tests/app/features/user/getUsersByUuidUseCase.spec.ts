@@ -1,48 +1,48 @@
 import { randomUUID } from "node:crypto";
 import { UserRepository } from "../../../../src/app/features/user/repository";
-import { GetUsersUseCase } from "../../../../src/app/features/user/usecases/getUsersUseCase"
+import { GetUserByUuidUseCase } from "../../../../src/app/features/user/usecases/getUsersByUuidUseCase"
 
-describe('get users usecase test', () => {
+describe('get user by uuid usecase test', () => {
     beforeEach(() => jest.clearAllMocks());
     
     it('should get all users', async () => {
         const userList = [
         {
-            uuid: randomUUID(),
             name: 'User 1',
             email: 'user1@teste.com',
             password: 'senha123',
+            uuid: "example-uuid",
         },
         {
-            uuid: randomUUID(),
             name: 'User 2',
             email: 'user2@teste.com',
             password: 'senha123',
+            uuid: randomUUID(),
         },
         {
-            uuid: randomUUID(),
             name: 'User 3',
             email: 'user2@teste.com',
             password: 'senha123',
+            uuid: randomUUID(),
         }]
 
 
-        const userParams = {
-            nameFilter: 'test'
+        const uuidParams = {
+            uuid: 'example-uuid'
         }
 
         const mockedUserRepository = {
-            getAllUsers: jest.fn().mockResolvedValue(userList),
+            getUser: jest.fn().mockResolvedValue(userList[0]),
         };
 
-        const getUsersUseCase = new GetUsersUseCase(
+        const getUsersUseCase = new GetUserByUuidUseCase(
             mockedUserRepository as unknown as UserRepository
         );
         
-        const allUsers = await getUsersUseCase.execute(userParams);
+        const user = await getUsersUseCase.execute(uuidParams);
 
-        expect(mockedUserRepository.getAllUsers).toHaveBeenCalled();
-        expect(allUsers).toEqual(userList);
+        expect(mockedUserRepository.getUser).toHaveBeenCalled();
+        expect(user).toEqual(userList[0]);
         
     });
 });
